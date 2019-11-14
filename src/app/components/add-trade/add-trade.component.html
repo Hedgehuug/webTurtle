@@ -1,0 +1,37 @@
+<div class="card">
+    <div class="card-content">
+        <span class="card-title">Add Trade</span>
+        <form (ngSubmit)="onSubmit()" class="col s6">
+            <div class="row">
+                <div class="input-fiel col s5">
+                    <input type="date" placeholder="Date" [(ngModel)]="trade.date" name="date">
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-fiel col s4">
+                    <input type="text" placeholder="Pair" [(ngModel)]="trade.pair" name="pair">
+                </div>
+                <div class="input-fiel col s4">
+                    <input type="number" placeholder="Entry Price" [(ngModel)]="trade.entry" name="entry" #entry>
+                </div>
+                <div class="input-fiel col s4">
+                    <input type="number" placeholder="Entry Amount" [(ngModel)]="trade.amount" name="amount">
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-fiel col s4">
+                    <input type="number" placeholder="Stop-Loss" [(ngModel)]="trade.stopLoss" name="stopLoss">
+                </div>
+                <div class="input-fiel col s4">
+                    <input type="number" placeholder="Exit Price" [(ngModel)]="trade.exit" name="exit" #exit>
+                </div>
+                <div class="input-fiel col s4">
+                    <input type="number" placeholder="Profit" [(ngModel)]="this.profit" name="profit">
+                </div>
+            </div>
+            <div class="row">
+                <input type="submit" class="right btn" value="Submit">
+            </div>
+        </form>
+    </div>
+</div>
