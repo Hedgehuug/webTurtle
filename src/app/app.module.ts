@@ -1,3 +1,4 @@
+import { AuthService } from './services/auth.service';
 import { Trade } from './models/trade';
 import { UserService } from './services/user.service';
 import { TradesService } from './services/trades.service';
@@ -9,29 +10,43 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
 import { FormsModule } from '@angular/forms';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AddTradeComponent } from './components/add-trade/add-trade.component';
+import { RegistrationComponent } from './components/auth/registration/registration.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { AccountComponent } from './components/account/account.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     MainListComponent,
-    AddTradeComponent
+    AddTradeComponent,
+    RegistrationComponent,
+    LoginComponent,
+    LandingPageComponent,
+    NavigationComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularFirestoreModule,
     FormsModule,
+    AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebase, "webjournal"),  
 
   ],
   providers: [
     UserService,
-    TradesService
+    TradesService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

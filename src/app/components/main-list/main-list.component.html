@@ -1,5 +1,36 @@
-<div>
-    <ul>
-        <li class="text" *ngFor="let trade of trades">{{trade}}</li>
+<div *ngIf="trades?.length">
+    <div class="row" style="margin-bottom:0%; margin-top:15px;">
+        <span class="title col s2 ">Date:</span>
+        <span class="title col s2 ">Pair:</span>
+        <span class="title col s2 ">Entry:</span>
+        <span class="title col s2 ">Amount:</span>
+    </div>
+    <ul class="collection" *ngFor="let item of trades">
+        <li class="collection-item" style="padding-bottom: 0%; padding-left:0%;">
+            <div class="row" style="margin-bottom:0;">
+                <div class="input-field col s2">
+                    <input type="datetime" [(ngModel)]="item.date" class="validate">
+                </div>
+                <div class="input-field col s2">
+                    <input type="text" placeholder="Enter Pair:" [(ngModel)]="item.pair" id="pair" class="validate">
+                    <label class="active" for="pair">Trading Pair:</label>
+                </div>
+                <div class="input-field col s2">
+                    <input type="text" placeholder="Enter Entry:" [(ngModel)]="item.entry" id="entry" class="validate">
+                    <label class="active" for="entry">Entry Price:</label>
+                </div>
+                <div class="input-field col s2">
+                    <input type="text" placeholder="Enter Amount:" [(ngModel)]="item.amount" id="amount" class="validate">
+                    <label class="active" for="amount">Entry Amount:</label>
+                </div>
+                <div class="input-field col s2">
+                    <input type="text" placeholder="Stop-loss:" [(ngModel)]="item.stopLoss" id="stopLoss" class="validate">
+                    <label class="active" for="amount">Stop-loss:</label>
+                </div>
+                <i (click)="editItem($event,item)" class="fa fa-pencil right" style="cursor:pointer"></i>
+
+            </div>
+
+        </li>
     </ul>
 </div>

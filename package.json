@@ -20,10 +20,12 @@
         "@angular/platform-browser": "~8.2.13",
         "@angular/platform-browser-dynamic": "~8.2.13",
         "@angular/router": "~8.2.13",
+        "@types/jquery": "^3.3.31",
         "firebase": "^7.3.0",
         "font-awesome": "^4.7.0",
         "jquery": "^3.4.1",
         "materialize-css": "^1.0.0-rc.2",
+        "materializecss": "^1.0.11",
         "rxjs": "~6.4.0",
         "tslib": "^1.10.0",
         "zone.js": "~0.9.1"

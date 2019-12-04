@@ -1,9 +1,9 @@
+import { AuthService } from './auth.service';
 import { Trade } from './../models/trade';
-import { UserService } from './user.service';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from "@angular/fire/firestore";
 import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
+import { map,switchMap } from "rxjs/operators";
 
 
 
@@ -11,31 +11,44 @@ import { map } from "rxjs/operators";
   providedIn: 'root'
 })
 export class TradesService {
-  trades:Observable<Trade[]>;
+  trades$:Observable<Trade[]>;
   tradesDocument: AngularFirestoreDocument<Trade[]>;
   tradesCollection: AngularFirestoreCollection<Trade>;
+
+
+
+
+  constructor(
+    public afs:AngularFirestore,
+    private auth: AuthService){
+        }
+  
   
 
-  constructor(public afs:AngularFirestore) {
+  getTrades(){
+    this.auth.user$.subscribe(x=>{
+      return this.retrieveTrades(x);
+    })
+  }
 
-    this.tradesCollection = this.afs.collection('Trades');
-    this.trades = this.tradesCollection.snapshotChanges().pipe(map(changes =>{
+  addTrade(trade:Trade){
+    console.log(trade);
+    this.tradesCollection.add(trade);
+  }
+
+  retrieveTrades(user){
+    //Creates Observable of trades
+    this.tradesCollection = this.afs.collection(`Users/${user.uid}/Entries`);
+    
+    this.trades$ = this.tradesCollection.snapshotChanges().pipe(map(changes =>{
       return changes.map(a=>{
-        const data = a.payload.doc.data() as Trade;
-        data.id = a.payload.doc.id;
-        return data;
+      const data = a.payload.doc.data() as Trade;
+      data.id = a.payload.doc.id;
+      return data;
       })
     }))
-    
+    return this.trades$;
   }
-    getTrades(){
-      return this.trades;
-    }
 
-    addTrade(trade:Trade){
-      console.log(trade);
-      this.tradesCollection.add(trade);
-    }
 }
-
 

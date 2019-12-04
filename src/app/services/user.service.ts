@@ -1,3 +1,4 @@
+import { AuthService } from './auth.service';
 import { User } from './../models/users';
 import { Injectable } from '@angular/core';
 import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore} from "@angular/fire/firestore";
@@ -11,33 +12,45 @@ import { map } from "rxjs/operators";
   providedIn: 'root'
 })
 export class UserService {
-  users:Observable<User[]>;
-  usersDocument: AngularFirestoreDocument<User[]>;
+  user$:Observable<User>;
+  usersDocument: AngularFirestoreDocument<User>;
   usersCollection: AngularFirestoreCollection<User>;
+  user:User;
   
   
 
-  constructor(public afs: AngularFirestore) {
+  constructor(
+    public afs: AngularFirestore,
+    public as: AuthService) {
 
-
-
-    this.usersCollection = afs.collection("Users");
-    /// /// /// ///
-    this.users = this.usersCollection.snapshotChanges().pipe(map(changes =>{
-      return changes.map(a =>{
-        const data = a.payload.doc.data() as User;
-        data.id = a.payload.doc.id;
-        return data;
-      })
-    }));
+    this.as.user$.subscribe(data =>{
+    
+      const userObj = {
+        uid: data.uid,
+        displayName: data.displayName,
+        email: data.email
+      }
+      
+      this.user = userObj;
+      
+      /*
+      this.user$ = this.usersDocument.snapshotChanges().pipe(map(changes =>{
+        return changes.map(a =>{
+          const data = a.payload.doc.data() as User;
+          data.uid = a.payload.doc.id;
+          return data;
+        })
+      }));
+       */
+    })
     
   }
 
 
   getUser(){
-    return this.users;
+    return this.user;
   }
   getUerId(){
-    return this.users[0]["id"];
+    return this.user$["id"];
   }
 }

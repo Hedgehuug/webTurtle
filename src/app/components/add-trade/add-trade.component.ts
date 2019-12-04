@@ -1,7 +1,9 @@
+import { AuthService } from './../../services/auth.service';
 import { TradesService } from './../../services/trades.service';
 import { Trade } from './../../models/trade';
 import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
+import { stringify } from 'querystring';
 
 
 @Component({
@@ -11,6 +13,8 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class AddTradeComponent implements OnInit {
+
+
 
   timeS= Math.round(new Date().getTime() / 1000);
   trade: Trade = {
@@ -24,23 +28,41 @@ export class AddTradeComponent implements OnInit {
     exit:null,
     profit: null
   }
-  constructor(private userService: UserService, private tService: TradesService) { 
+  expanded = false;
+
+  constructor(
+    private userService: UserService,
+    private tService: TradesService,
+    private auth: AuthService) { 
     
     
   }
 
   ngOnInit() {
-    this.trade.exit = this.trade.entry;
   }
 
   onSubmit(){
     this.tService.addTrade(this.trade);
+    this.expanded = false;
     for (let key in this.trade) {
       if (this.trade.hasOwnProperty(key)) {
         this.trade[key] = null;
+        this.trade["profit"] = null;
       }
     }
-    this.trade.profit = null;
-    }
+  }
+  updateInfo(){
+    let entry = document.getElementById("#entry");
+    let amount = document.getElementById("#amount");
+    let stopLoss = document.getElementById("#stopLoss");
+    console.log(entry, amount, stopLoss);
+
+  }
+  changeState(){
+    this.expanded = true;
+  }
+  closeWindow(){
+    this.expanded = false;
+  }
   }
 

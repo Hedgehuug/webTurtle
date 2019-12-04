@@ -2,8 +2,7 @@ import { Trade } from './trade';
 import { Observable } from 'rxjs';
 
 export interface User{
-    id?: string;
-    name: string;
+    displayName: string;
     email: string;
-    password: string;
+    uid?: string;
 }
