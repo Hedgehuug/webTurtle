@@ -23,13 +23,6 @@ export class TradesService {
     private auth: AuthService){
         }
   
-  
-
-  getTrades(){
-    this.auth.user$.subscribe(x=>{
-      return this.retrieveTrades(x);
-    })
-  }
 
   addTrade(trade:Trade){
     console.log(trade);
@@ -48,6 +41,20 @@ export class TradesService {
       })
     }))
     return this.trades$;
+  }
+  calcStopLoss(
+    amount:number,
+    entry:number,
+    risk:number,
+    type:boolean){
+      let stopLoss:number;
+      if (type === true) {
+        stopLoss = ((amount-risk)/amount*entry);
+      }
+      else if(type === false) {
+        stopLoss = ((amount+risk)/(amount/entry));
+      }
+      return stopLoss;
   }
 
 }

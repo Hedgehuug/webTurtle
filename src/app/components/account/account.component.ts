@@ -1,4 +1,3 @@
-import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,17 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
-
-  userId=this.auth.userData();
-  
-
-
-  constructor(private auth: AuthService) { }
+  constructor() { }
   
   ngOnInit() {}
-
-  printId(){
-    console.log("succ");
-    
-  }
 }

@@ -1,17 +1,19 @@
+import { MaterialDesignModule } from './matDesign/material-design/material-design.module';
 import { AuthService } from './services/auth.service';
-import { Trade } from './models/trade';
 import { UserService } from './services/user.service';
 import { TradesService } from './services/trades.service';
-import { MainListComponent } from './components/main-list/main-list.component';
 import { environment } from './../environments/environment';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+
+
 
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
 import { FormsModule } from '@angular/forms';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
+import { MainListComponent } from './components/main-list/main-list.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AddTradeComponent } from './components/add-trade/add-trade.component';
@@ -40,8 +42,8 @@ import { AccountComponent } from './components/account/account.component';
     AngularFirestoreModule,
     FormsModule,
     AngularFireAuthModule,
-    AngularFireModule.initializeApp(environment.firebase, "webjournal"),  
-
+    AngularFireModule.initializeApp(environment.firebase, "webjournal"),
+    MaterialDesignModule
   ],
   providers: [
     UserService,

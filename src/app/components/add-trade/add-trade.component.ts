@@ -3,7 +3,7 @@ import { TradesService } from './../../services/trades.service';
 import { Trade } from './../../models/trade';
 import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
-import { stringify } from 'querystring';
+
 
 
 @Component({
@@ -18,7 +18,7 @@ export class AddTradeComponent implements OnInit {
 
   timeS= Math.round(new Date().getTime() / 1000);
   trade: Trade = {
-    date: `${this.timeS}`,
+    date: null,
     id: null,
     pair: null,
     entry: null,
@@ -29,16 +29,20 @@ export class AddTradeComponent implements OnInit {
     profit: null
   }
   expanded = false;
+  day:number;
+  month:number;
+  year:number;
+  risk:number;
 
   constructor(
     private userService: UserService,
     private tService: TradesService,
     private auth: AuthService) { 
     
-    
   }
 
   ngOnInit() {
+
   }
 
   onSubmit(){
@@ -47,16 +51,8 @@ export class AddTradeComponent implements OnInit {
     for (let key in this.trade) {
       if (this.trade.hasOwnProperty(key)) {
         this.trade[key] = null;
-        this.trade["profit"] = null;
       }
     }
-  }
-  updateInfo(){
-    let entry = document.getElementById("#entry");
-    let amount = document.getElementById("#amount");
-    let stopLoss = document.getElementById("#stopLoss");
-    console.log(entry, amount, stopLoss);
-
   }
   changeState(){
     this.expanded = true;
@@ -64,5 +60,25 @@ export class AddTradeComponent implements OnInit {
   closeWindow(){
     this.expanded = false;
   }
+  switchType(){
+    if (this.trade.type == true) {
+      this.trade.type = false;
+    }
+    else if (this.trade.type == false) {
+      this.trade.type = true;
+    }
   }
+  getTime(){
+    console.log(`${this.day}/${this.month}/${this.year}`);
+  }
+  getStopLoss(){
+    if (this.trade.amount != null && this.trade.entry != null && this.risk != null) {
+      this.trade.stopLoss = this.tService.calcStopLoss(
+        this.trade.amount,
+        this.trade.entry,
+        this.risk,
+        this.trade.type)
+    }
+  }
+}
 

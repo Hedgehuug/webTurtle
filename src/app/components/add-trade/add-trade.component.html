@@ -4,27 +4,35 @@
         <span class="card-title">Add Trade</span>
         <form (ngSubmit)="onSubmit()" class="col s6">
             <div class="row">
-                <div class="input-field col s5">
-                    <input type="text" class="datepicker" [(ngModel)]="trade.date" name="date">
-                </div>
-                <div class="input-field col s5">
-                    <select>
-                        <option value="1">Long</option>
-                        <option value="2">Short</option>
-                    </select>
-                    <label>Select type of trade</label>
-                </div>
+                <div class="datepicker-calendar-container" style="padding:3px;">
+                    <div class="row">
+                        <input [matDatepicker]="myDatepicker">
+                        <mat-datepicker #myDatepicker></mat-datepicker>
+                        <div class="input-field col s3" style="padding:5px;margin:auto;">
+                            <div class="btn green" (click)="switchType()" *ngIf="trade.type == true;else short">Long</div>
+                            <label class="active">Selected:</label>
+                        </div>
+                        <div class="btn" (click)="getTime()">get Time</div>
+                        <div class="input-field col s3">
+                            <input type="number" [(ngModel)]="risk" placeholder="risk value" name="risk" (input)="getStopLoss()">
+                        </div>
 
+
+                        <ng-template #short>
+                            <div class="btn red" (click)="switchType()">Short</div>
+                        </ng-template>
+                    </div>
+                </div>
             </div>
             <div class="row">
                 <div class="input-field col s4">
                     <input type="text" placeholder="Pair" [(ngModel)]="trade.pair" name="pair">
                 </div>
                 <div class="input-field col s4">
-                    <input type="number" placeholder="Entry Price" [(ngModel)]="trade.entry" name="entry" id="entry" #entry onchange="updateInfo()">
+                    <input type="number" placeholder="Entry Price" [(ngModel)]="trade.entry" name="entry" id="entry" #entry (input)="getStopLoss()">
                 </div>
                 <div class="input-field col s4">
-                    <input type="number" placeholder="Entry Amount" [(ngModel)]="trade.amount" name="amount" id="amount" onchange="updateInfo()">
+                    <input type="number" placeholder="Entry Amount" [(ngModel)]="trade.amount" name="amount" id="amount" (input)="getStopLoss()">
                 </div>
             </div>
             <div class="row">

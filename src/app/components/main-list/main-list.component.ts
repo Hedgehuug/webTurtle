@@ -17,6 +17,8 @@ import { Observable, of } from 'rxjs';
 export class MainListComponent implements OnInit {
   trades:Trade[];
   userData = this.as.userData();
+  editState = false;
+  tradeToEdit:Trade;
   
 
   constructor(
@@ -32,7 +34,6 @@ export class MainListComponent implements OnInit {
         a.subscribe(x=>{
           console.log(x);          
           this.trades = x;
-          console.log(this.ts.getTrades());
                       
         })
       })
@@ -43,6 +44,16 @@ export class MainListComponent implements OnInit {
       console.log(data.uid);
 
     })
+  }
+  editItem(event,trade:Trade){
+    this.editState = true;
+    this.tradeToEdit = trade;
+  }
+  closeExpand(event,trade:Trade){
+    this.editState = false;
+  }
+  updateEntry(){
+    this.editState = false;
   }
 }
 
