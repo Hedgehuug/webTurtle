@@ -1,12 +1,10 @@
+import { DatePipe } from '@angular/common';
 import { Trade } from './../../models/trade';
-import { switchMap, map } from 'rxjs/operators';
 import { AuthService } from './../../services/auth.service';
-import { User } from './../../models/users';
-import { UserService } from './../../services/user.service';
 import { TradesService } from './../../services/trades.service';
-import { AngularFirestoreModule, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { getActiveOffset } from '@angular/material/datepicker/typings/multi-year-view';
+
 
 
 @Component({
@@ -19,41 +17,60 @@ export class MainListComponent implements OnInit {
   userData = this.as.userData();
   editState = false;
   tradeToEdit:Trade;
+  localType;
+  localDate;
   
 
   constructor(
-    private us:UserService,
     private ts:TradesService,
-    private as:AuthService) {
+    private as:AuthService,
+    private datePipe:DatePipe) {
       
     }
 
     ngOnInit() {
       this.as.user$.subscribe(x=>{
         const a = this.ts.retrieveTrades(x);
-        a.subscribe(x=>{
-          console.log(x);          
+        a.subscribe(x=>{         
           this.trades = x;
-                      
+          for (const x in this.trades) {
+            
+            console.log(new Date(this.trades[3].date["seconds"]*1000));
+          }
+               
         })
       })
       
     }
-  public trySub(){
-    this.userData.subscribe(data=>{
-      console.log(data.uid);
-
-    })
-  }
   editItem(event,trade:Trade){
     this.editState = true;
     this.tradeToEdit = trade;
   }
-  closeExpand(event,trade:Trade){
-    this.editState = false;
-  }
   updateEntry(){
     this.editState = false;
+  }
+  deleteTrade(event,trade:Trade){
+    this.as.user$.subscribe(data=>{
+      this.ts.deleteItem(trade,data)
+    })
+  }
+  getInfo(item:Trade){
+    if (item.type == true) {
+      this.localType = "Long";
+    }
+    else{
+      this.localType = "Short";
+    }
+    let p = new Date(item.date["seconds"] * 1000);
+    this.localDate = p.toISOString().slice(0,10);
+    
+  }
+  changeType(item:Trade){
+    if (this.localType == "long") {
+      item.type = true;
+    } else if (this.localType == "short") {
+      item.type == false;
+    }
   }
 }
 

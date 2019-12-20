@@ -17,6 +17,7 @@
         "@angular/compiler": "~8.2.13",
         "@angular/core": "~8.2.13",
         "@angular/fire": "^5.2.3",
+        "@angular/flex-layout": "^8.0.0-beta.27",
         "@angular/forms": "~8.2.13",
         "@angular/material": "^8.2.3",
         "@angular/platform-browser": "~8.2.13",
@@ -29,6 +30,7 @@
         "jquery": "^3.4.1",
         "materialize-css": "^1.0.0-rc.2",
         "materializecss": "^1.0.11",
+        "moment": "^2.24.0",
         "rxjs": "~6.4.0",
         "tslib": "^1.10.0",
         "zone.js": "~0.9.1"

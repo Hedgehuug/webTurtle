@@ -28,6 +28,10 @@ export class TradesService {
     console.log(trade);
     this.tradesCollection.add(trade);
   }
+  deleteItem(item: Trade,user){
+    this.tradesDocument = this.afs.doc(`Users/${user.uid}/Entries/${item.id}`);
+    this.tradesDocument.delete();
+  }
 
   retrieveTrades(user){
     //Creates Observable of trades

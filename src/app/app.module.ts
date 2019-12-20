@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { MaterialDesignModule } from './matDesign/material-design/material-design.module';
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
@@ -5,7 +6,7 @@ import { TradesService } from './services/trades.service';
 import { environment } from './../environments/environment';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { MAT_DATE_LOCALE } from '@angular/material';
 
 
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -22,6 +23,7 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { AccountComponent } from './components/account/account.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 
@@ -43,12 +45,15 @@ import { AccountComponent } from './components/account/account.component';
     FormsModule,
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebase, "webjournal"),
-    MaterialDesignModule
+    MaterialDesignModule,
+    FlexLayoutModule
   ],
   providers: [
     UserService,
     TradesService,
-    AuthService
+    AuthService,
+    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

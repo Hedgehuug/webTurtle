@@ -1,0 +1,15 @@
+.spacer {
+    flex: 1 1 auto;
+}
+
+.logoFirst {
+    color: green;
+}
+
+.menu-button {
+    margin: 0px 10px 0px 10px;
+}
+
+.logo {
+    margin-bottom: 0px;
+}

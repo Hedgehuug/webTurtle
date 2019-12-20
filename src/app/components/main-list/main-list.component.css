@@ -1,3 +1,15 @@
-.secondary-content {
-    font-size: 120%;
+.secondary {
+    opacity: 0.7;
+}
+
+.expansion_header {
+    width: 20%;
+}
+
+.tradeForm {
+    margin: 0px 10px 0px 10px;
+}
+
+.list:nth-child(even) {
+    background-color: #E0E0E0;
 }

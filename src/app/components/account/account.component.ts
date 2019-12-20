@@ -1,3 +1,5 @@
+import { AuthService } from './../../services/auth.service';
+import { TradesService } from './../../services/trades.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
-  constructor() { }
+  items;
+  constructor(private ts:TradesService,private as:AuthService) { }
   
-  ngOnInit() {}
+  ngOnInit() {
+  }
 }

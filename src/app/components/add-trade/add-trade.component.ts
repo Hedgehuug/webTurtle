@@ -3,6 +3,7 @@ import { TradesService } from './../../services/trades.service';
 import { Trade } from './../../models/trade';
 import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -23,16 +24,18 @@ export class AddTradeComponent implements OnInit {
     pair: null,
     entry: null,
     amount:null,
-    type:true,
+    type:null,
     stopLoss:null,
     exit:null,
     profit: null
   }
   expanded = false;
+  localType = null;
   day:number;
   month:number;
   year:number;
   risk:number;
+  
 
   constructor(
     private userService: UserService,
@@ -79,6 +82,17 @@ export class AddTradeComponent implements OnInit {
         this.risk,
         this.trade.type)
     }
+  }
+  changeType(){
+    if (this.localType == "long") {
+      this.trade.type = true;
+    } else if (this.localType == "short") {
+      this.trade.type == false;
+    }
+  }
+  checkDateFormat(){
+    console.log(this.trade.date);
+    
   }
 }
 

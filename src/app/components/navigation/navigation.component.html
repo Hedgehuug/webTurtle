@@ -1,20 +1,10 @@
-<nav class="top-nav grey darken-3">
-    <div class="nav-wrapper">
-        <ul id="nav-mobile" class="right" style="padding-right:20px;">
-            <li><a href="/account">Account</a></li>
-            <li><a href="/">Main Page</a></li>
-            <li><a href="/">About</a></li>
-            <li style="margin-left:5px;"><i class="fa fa-user" style="color:white;font-size:150%"></i></li>
-        </ul>
+<mat-toolbar>
+    <div href="/" style="cursor: pointer;" routerLink="">
+        <strong class="logo logoSecond mat-display-1"><span class="logo logoFirst mat-display-1">Turtle</span>Journal</strong>
     </div>
-</nav>
-<div class="sidenav sidenav-fixed">
-    <ul id="sidenav">
-        <a href="/" class="logo-container">
-            <h3 class="header-nav nav-title black-text center"><span class="green-text">Turtle</span>Journal</h3>
-        </a>
-        <li><a href="/account">Dashboard</a></li>
-        <li><a href="!#">Entries</a></li>
-        <li><a href="!#">Settings</a></li>
-    </ul>
-</div>
+    <span class="spacer"></span>
+    <button mat-button class="menu-button" routerLink="/account">Account</button>
+    <button mat-button class="menu-button" routerLink="">Main Page</button>
+    <button mat-button class="menu-button" routerLink="/account">About</button>
+    <button mat-button><i href="/account" class="menu-button fa fa-user" style="font-size:130%"></i></button>
+</mat-toolbar>

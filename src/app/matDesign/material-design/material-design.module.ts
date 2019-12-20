@@ -8,7 +8,14 @@ import {
     MatButtonModule,
     MatListModule,
     MatDatepickerModule,
-    MatExpansionModule } from '@angular/material';
+    MatExpansionModule,
+    MatNativeDateModule,
+    MatFormFieldModule, 
+    MatInputModule,
+    MatSidenavModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatSelectModule} from '@angular/material';
 
 
 
@@ -21,7 +28,28 @@ import {
     MatButtonModule,
     MatListModule,
     MatDatepickerModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSidenavModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatSelectModule
+  ],
+  exports: [
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatListModule,
+    MatDatepickerModule,
+    MatExpansionModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSidenavModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatSelectModule
   ]
 })
 export class MaterialDesignModule { }
