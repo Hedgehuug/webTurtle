@@ -3,7 +3,6 @@ import { Trade } from './../../models/trade';
 import { AuthService } from './../../services/auth.service';
 import { TradesService } from './../../services/trades.service';
 import { Component, OnInit } from '@angular/core';
-import { getActiveOffset } from '@angular/material/datepicker/typings/multi-year-view';
 
 
 
@@ -47,7 +46,6 @@ export class MainListComponent implements OnInit {
     this.tradeToEdit = trade;
   }
   updateEntry(){
-    this.editState = false;
   }
   deleteTrade(event,trade:Trade){
     this.as.user$.subscribe(data=>{

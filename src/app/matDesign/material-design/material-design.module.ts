@@ -15,7 +15,9 @@ import {
     MatSidenavModule,
     MatCardModule,
     MatToolbarModule,
-    MatSelectModule} from '@angular/material';
+    MatSelectModule,
+    MatDividerModule
+  } from '@angular/material';
 
 
 
@@ -35,7 +37,8 @@ import {
     MatSidenavModule,
     MatCardModule,
     MatToolbarModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDividerModule
   ],
   exports: [
     BrowserAnimationsModule,
@@ -49,7 +52,8 @@ import {
     MatSidenavModule,
     MatCardModule,
     MatToolbarModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDividerModule
   ]
 })
 export class MaterialDesignModule { }

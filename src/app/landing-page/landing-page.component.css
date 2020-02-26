@@ -1,0 +1,29 @@
+#main-body {
+    background-color: #93CF37;
+}
+
+#solutions {
+    margin: 4vh 8vw 0 8vw;
+}
+
+#solution-card {
+    background: linear-gradient(to bottom right, #80DEEA, #BDBDBD);
+}
+
+#solution-card mat-divider {
+    width: 60%;
+}
+
+.solContent {
+    margin: auto;
+}
+
+#solution-inner {
+    min-width: 100%;
+    background-color: white;
+    padding: 2rem;
+}
+
+.solutionIcon {
+    background-color: pink;
+}

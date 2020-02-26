@@ -24,6 +24,8 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { AccountComponent } from './components/account/account.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { DashboardComponent } from './components/accountElements/dashboard/dashboard.component';
+import { EntriesComponent } from './components/accountElements/entries/entries.component';
 
 
 
@@ -36,7 +38,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     LoginComponent,
     LandingPageComponent,
     NavigationComponent,
-    AccountComponent
+    AccountComponent,
+    DashboardComponent,
+    EntriesComponent
   ],
   imports: [
     BrowserModule,

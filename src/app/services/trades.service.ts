@@ -2,8 +2,9 @@ import { AuthService } from './auth.service';
 import { Trade } from './../models/trade';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from "@angular/fire/firestore";
-import { Observable } from "rxjs";
+import { Observable, merge } from "rxjs";
 import { map,switchMap } from "rxjs/operators";
+import { UserData } from '../models/userData';
 
 
 
@@ -12,10 +13,10 @@ import { map,switchMap } from "rxjs/operators";
 })
 export class TradesService {
   trades$:Observable<Trade[]>;
+  userData$:Observable<UserData[]>
   tradesDocument: AngularFirestoreDocument<Trade[]>;
   tradesCollection: AngularFirestoreCollection<Trade>;
-
-
+  userDataDocument: AngularFirestoreDocument<UserData>;
 
 
   constructor(
@@ -32,6 +33,12 @@ export class TradesService {
     this.tradesDocument = this.afs.doc(`Users/${user.uid}/Entries/${item.id}`);
     this.tradesDocument.delete();
   }
+  getUserData(user){
+    this.userDataDocument = this.afs.doc(`userData/${user.uid}`);
+    this.userDataDocument.set({userId: user.uid}, {merge:true}
+
+    )
+  }
 
   retrieveTrades(user){
     //Creates Observable of trades
@@ -46,6 +53,7 @@ export class TradesService {
     }))
     return this.trades$;
   }
+  
   calcStopLoss(
     amount:number,
     entry:number,

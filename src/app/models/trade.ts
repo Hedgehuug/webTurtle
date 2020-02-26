@@ -10,4 +10,6 @@ export interface Trade {
     stopLoss?: number;
     exit?: number;
     profit?: number;
+    risk?: number;
+    comment?: number;
 }

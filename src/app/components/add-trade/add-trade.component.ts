@@ -27,7 +27,9 @@ export class AddTradeComponent implements OnInit {
     type:null,
     stopLoss:null,
     exit:null,
-    profit: null
+    profit: null,
+    risk: null,
+    comment: null
   }
   expanded = false;
   localType = null;
@@ -45,7 +47,6 @@ export class AddTradeComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
 
   onSubmit(){
@@ -89,10 +90,6 @@ export class AddTradeComponent implements OnInit {
     } else if (this.localType == "short") {
       this.trade.type == false;
     }
-  }
-  checkDateFormat(){
-    console.log(this.trade.date);
-    
   }
 }
 

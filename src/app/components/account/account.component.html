@@ -7,7 +7,7 @@
             <mat-list-item routerLink="/account">
                 Dashboard
             </mat-list-item>
-            <mat-list-item href="!#">
+            <mat-list-item routerLink="/account/entries">
                 Entries
             </mat-list-item>
             <mat-list-item href="!#">
@@ -17,8 +17,7 @@
     </mat-sidenav>
     <mat-sidenav-content>
         <mat-card class="mat-elevation-z4" style="background-color:#8bc34a; padding:20px;min-height:1080px; margin:2%;">
-            <app-add-trade></app-add-trade>
-            <app-main-list></app-main-list>
+            <router-outlet></router-outlet>
         </mat-card>
 
     </mat-sidenav-content>

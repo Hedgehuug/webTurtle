@@ -12,5 +12,8 @@ export class AccountComponent implements OnInit {
   constructor(private ts:TradesService,private as:AuthService) { }
   
   ngOnInit() {
+    this.as.user$.subscribe(data =>{
+      this.ts.getUserData(data);
+    })
   }
 }

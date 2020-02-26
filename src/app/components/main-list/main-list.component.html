@@ -1,4 +1,4 @@
-<div *ngIf="trades?.length" style="background-color:inherit; padding:20px; margin:15px 0 0 0;" class="mat-elevation-z1">
+<div *ngIf="trades?.length" style="background-color:inherit; padding:20px; margin:15px 0 0 0;">
     <mat-accordion multi="false">
         <div layout="row" style="margin:0px 0px 0px 2%;">
             <mat-label fxFlex='16'>
@@ -104,7 +104,8 @@
                     </div>
                     <div layout="row ">
                         <div fxFlex="80 "></div>
-                        <button mat-raised-button (click)='deleteTrade($event,item)' style="background-color:red ">Delete</button>
+                        <button mat-raised-button (click)='deleteTrade($event,item)' style="background-color:red; margin-right:10px;">Delete</button>
+                        <button mat-raised-button (click)='updateEntry()' type="submit">Submit</button>
                     </div>
 
                 </form>
