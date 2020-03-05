@@ -1,5 +1,5 @@
 #main-body {
-    background-color: #93CF37;
+    background-color: beige;
 }
 
 #solutions {
@@ -7,11 +7,7 @@
 }
 
 #solution-card {
-    background: linear-gradient(to bottom right, #80DEEA, #BDBDBD);
-}
-
-#solution-card mat-divider {
-    width: 60%;
+    background: linear-gradient(to bottom right, #83A948, #83A948);
 }
 
 .solContent {
@@ -20,10 +16,15 @@
 
 #solution-inner {
     min-width: 100%;
-    background-color: white;
     padding: 2rem;
 }
 
-.solutionIcon {
-    background-color: pink;
+.solIcons {
+    margin: 0;
+    width: 40%;
+    height: auto;
+}
+
+.solStuff {
+    margin: auto;
 }

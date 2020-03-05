@@ -32,11 +32,7 @@ export class MainListComponent implements OnInit {
         const a = this.ts.retrieveTrades(x);
         a.subscribe(x=>{         
           this.trades = x;
-          for (const x in this.trades) {
-            
-            console.log(new Date(this.trades[3].date["seconds"]*1000));
-          }
-               
+          console.log(x);
         })
       })
       
@@ -61,7 +57,6 @@ export class MainListComponent implements OnInit {
     }
     let p = new Date(item.date["seconds"] * 1000);
     this.localDate = p.toISOString().slice(0,10);
-    
   }
   changeType(item:Trade){
     if (this.localType == "long") {

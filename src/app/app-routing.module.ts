@@ -1,3 +1,4 @@
+import { UnderConstructionComponent } from './components/under-construction/under-construction.component';
 import { EntriesComponent } from './components/accountElements/entries/entries.component';
 import { DashboardComponent } from './components/accountElements/dashboard/dashboard.component';
 import { AuthGuard } from './auth.guard';
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path:"landing",
     component: LandingPageComponent
+  },
+  {
+    path:"about",
+    component: UnderConstructionComponent
   },
   {
     path:"account",

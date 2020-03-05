@@ -1,0 +1,13 @@
+#chart-card {
+    background-color: #263238;
+    margin: auto;
+}
+
+#chart-div {
+    width: 700px;
+    height: 300px;
+}
+
+#acc-chart {
+    fill: white;
+}

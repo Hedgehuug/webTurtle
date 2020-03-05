@@ -33,9 +33,6 @@ export class AddTradeComponent implements OnInit {
   }
   expanded = false;
   localType = null;
-  day:number;
-  month:number;
-  year:number;
   risk:number;
   
 
@@ -72,9 +69,8 @@ export class AddTradeComponent implements OnInit {
       this.trade.type = true;
     }
   }
-  getTime(){
-    console.log(`${this.day}/${this.month}/${this.year}`);
-  }
+
+  //Calculating Stop-loss
   getStopLoss(){
     if (this.trade.amount != null && this.trade.entry != null && this.risk != null) {
       this.trade.stopLoss = this.tService.calcStopLoss(

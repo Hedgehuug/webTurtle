@@ -1,5 +1,6 @@
 export interface UserData {
     userId?: string;
-    accountBalance?: number;
-    exchangeAccounts?: [];
+    initialBalance?: {balance:number,date:Date};
+    accounts?: [];
+    investments?: [];
 }

@@ -4,7 +4,7 @@ import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
 import { TradesService } from './services/trades.service';
 import { environment } from './../environments/environment';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MAT_DATE_LOCALE } from '@angular/material';
 
@@ -26,6 +26,10 @@ import { AccountComponent } from './components/account/account.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DashboardComponent } from './components/accountElements/dashboard/dashboard.component';
 import { EntriesComponent } from './components/accountElements/entries/entries.component';
+import { UnderConstructionComponent } from './components/under-construction/under-construction.component';
+import { AccountChartComponent } from './components/accountElements/account-chart/account-chart.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -40,7 +44,9 @@ import { EntriesComponent } from './components/accountElements/entries/entries.c
     NavigationComponent,
     AccountComponent,
     DashboardComponent,
-    EntriesComponent
+    EntriesComponent,
+    UnderConstructionComponent,
+    AccountChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,7 +56,9 @@ import { EntriesComponent } from './components/accountElements/entries/entries.c
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebase, "webjournal"),
     MaterialDesignModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    NgxChartsModule,
+    BrowserAnimationsModule
   ],
   providers: [
     UserService,
@@ -59,6 +67,8 @@ import { EntriesComponent } from './components/accountElements/entries/entries.c
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
     DatePipe
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  
 })
 export class AppModule { }

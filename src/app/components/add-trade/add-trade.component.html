@@ -7,7 +7,7 @@
         <form (ngSubmit)="onSubmit()">
             <div layout="row">
                 <mat-form-field fxFlex="30" layout="column">
-                    <input matInput mat-model-options="{timezone: 'utc'}" [(ngModel)]="trade.date" [matDatepicker]="picker" name="date">
+                    <input matInput mat-model-options="{'timezone': 'utc'}" [(ngModel)]="trade.date" [matDatepicker]="picker" name="date">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>

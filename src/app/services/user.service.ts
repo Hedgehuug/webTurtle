@@ -1,3 +1,4 @@
+import { UserData } from './../models/userData';
 import { AuthService } from './auth.service';
 import { User } from './../models/users';
 import { Injectable } from '@angular/core';
@@ -15,6 +16,7 @@ export class UserService {
   usersDocument: AngularFirestoreDocument<User>;
   usersCollection: AngularFirestoreCollection<User>;
   user:User;
+
   
   
 
@@ -29,18 +31,14 @@ export class UserService {
         displayName: data.displayName,
         email: data.email
       }
-
       
       this.user = userObj;
     })
-    
-  }
 
+
+  }
 
   getUser(){
     return this.user;
-  }
-  getUerId(){
-    return this.user$["id"];
   }
 }
