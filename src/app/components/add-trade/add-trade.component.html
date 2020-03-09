@@ -1,67 +1,68 @@
+<!--
 <mat-card style="margin:auto;width:80%" *ngIf="expanded ; else expandable">
     <div style="padding:15px;">
 
         <i class="fa fa-times" style="float:right; size: 200%; cursor: pointer" (click)="closeWindow()"></i>
         <span mat-card-title class="card-title">Add Trade</span>
 
-        <form (ngSubmit)="onSubmit()">
-            <div layout="row">
-                <mat-form-field fxFlex="30" layout="column">
-                    <input matInput mat-model-options="{'timezone': 'utc'}" [(ngModel)]="trade.date" [matDatepicker]="picker" name="date">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
+            <form (ngSubmit)="onSubmit()">
+                <div layout="row">
+                    <mat-form-field fxFlex="30" layout="column">
+                        <input matInput mat-model-options="{'timezone': 'utc'}" [(ngModel)]="trade.date" [matDatepicker]="picker" name="date">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+    
+                    <mat-form-field fxFlex layout="column">
+                        <mat-label>Selected:</mat-label>
+                        <mat-select [(value)]="localType" (valueChange)='changeType()'>
+                            <mat-option value='long'>Long</mat-option>
+                            <mat-option value='short'>Short</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+    
+                    <mat-form-field fxFlex="20">
+                        <input matInput type="number" [(ngModel)]="risk" placeholder="risk value" name="risk" (input)="getStopLoss()">
+                    </mat-form-field>
+                </div>
+    
+    
+    
+                <div layout="row">
+                    <mat-form-field class="input-field col s4">
+                        <input matInput type="text" placeholder="Pair" [(ngModel)]="trade.pair" name="pair">
+                    </mat-form-field>
+                    <mat-form-field class="input-field col s4">
+                        <input matInput type="number" placeholder="Entry Price" [(ngModel)]="trade.entry" name="entry" id="entry" #entry (input)="getStopLoss()">
+                    </mat-form-field>
+                    <mat-form-field class="input-field col s4">
+                        <input matInput type="number" placeholder="Entry Amount" [(ngModel)]="trade.amount" name="amount" id="amount" (input)="getStopLoss()">
+                    </mat-form-field>
+                </div>
+    
+    
+                <div layout="row">
+                    <mat-form-field>
+                        <input matInput type="number" placeholder="Stop-Loss" [(ngModel)]="trade.stopLoss" name="stopLoss" id="stopLoss">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput type="number" placeholder="Exit Price" [(ngModel)]="trade.exit" name="exit" id="exit">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput type="number" placeholder="Profit" [(ngModel)]="trade.profit" name="profit" id="profit">
+                    </mat-form-field>
+                </div>
+    
+                <div layout="row">
+                    <div fxFlex="92"></div>
+                    <button flex mat-raised-button type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </mat-card>
+        -->
 
-                <mat-form-field fxFlex layout="column">
-                    <mat-label>Selected:</mat-label>
-                    <mat-select [(value)]="localType" (valueChange)='changeType()'>
-                        <mat-option value='long'>Long</mat-option>
-                        <mat-option value='short'>Short</mat-option>
-                    </mat-select>
-                </mat-form-field>
-
-                <mat-form-field fxFlex="20">
-                    <input matInput type="number" [(ngModel)]="risk" placeholder="risk value" name="risk" (input)="getStopLoss()">
-                </mat-form-field>
-            </div>
 
 
 
-            <div layout="row">
-                <mat-form-field class="input-field col s4">
-                    <input matInput type="text" placeholder="Pair" [(ngModel)]="trade.pair" name="pair">
-                </mat-form-field>
-                <mat-form-field class="input-field col s4">
-                    <input matInput type="number" placeholder="Entry Price" [(ngModel)]="trade.entry" name="entry" id="entry" #entry (input)="getStopLoss()">
-                </mat-form-field>
-                <mat-form-field class="input-field col s4">
-                    <input matInput type="number" placeholder="Entry Amount" [(ngModel)]="trade.amount" name="amount" id="amount" (input)="getStopLoss()">
-                </mat-form-field>
-            </div>
-
-
-            <div layout="row">
-                <mat-form-field>
-                    <input matInput type="number" placeholder="Stop-Loss" [(ngModel)]="trade.stopLoss" name="stopLoss" id="stopLoss">
-                </mat-form-field>
-                <mat-form-field>
-                    <input matInput type="number" placeholder="Exit Price" [(ngModel)]="trade.exit" name="exit" id="exit">
-                </mat-form-field>
-                <mat-form-field>
-                    <input matInput type="number" placeholder="Profit" [(ngModel)]="trade.profit" name="profit" id="profit">
-                </mat-form-field>
-            </div>
-
-            <div layout="row">
-                <div fxFlex="92"></div>
-                <button flex mat-raised-button type="submit">Submit</button>
-            </div>
-        </form>
-    </div>
-</mat-card>
-
-
-
-<ng-template #expandable>
-    <button mat-raised-button (click)="changeState()">Add Trade</button>
-</ng-template>
+<button mat-raised-button (click)="onSubmit()">Add Trade</button>

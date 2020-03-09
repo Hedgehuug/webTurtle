@@ -13,3 +13,27 @@
 .list:nth-child(even) {
     background-color: #E0E0E0;
 }
+
+.form_row2 {
+    width: 9rem;
+}
+
+.form_row3 {
+    width: 9rem;
+}
+
+#typeSelect {
+    width: 6rem;
+}
+
+.remWidth {
+    width: 9rem;
+}
+
+.right-side-text {
+    margin: 0;
+}
+
+.right-titles {
+    opacity: 0.7;
+}

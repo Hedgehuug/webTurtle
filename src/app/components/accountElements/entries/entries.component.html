@@ -1,2 +1,17 @@
-<app-add-trade></app-add-trade>
-<app-main-list></app-main-list>
+<div fxLayout="row">
+    <app-add-trade></app-add-trade>
+    <div fxFlex></div>
+    <div fxLayout="column" fxLayoutGap="6px">
+        <div fxLayout="row">
+            <div fxFlex></div>
+            <p class="mat-card-subtitle" style="color:white">New trades will be added to the top of the list</p>
+        </div>
+        <p class="mat-card-subtitle" style="color:white;opacity:0.7">Changes will not be saved unless "Submit" button is pressed</p>
+    </div>
+</div>
+<div style="background-color:#8bc34a;" class="mat-elevation-z7">
+    <app-main-list></app-main-list>
+</div>
+
+
+<!--box-shadow: inset 2px 3px 7px rgba(0,0,0,0.5);-->

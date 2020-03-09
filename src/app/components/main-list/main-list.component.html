@@ -62,50 +62,74 @@
 
 
             <ng-template matExpansionPanelContent>
-                <form action="submit" (ngSubmit)="updateEntry()">
-                    <div layout="row">
-                        <mat-form-field class="tradeForm form_row1">
-                            <input matInput [value]="localDate" [matDatepicker]="picker" name="date">
-                            <mat-datepicker-toggle matSuffix [for]="picker "></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
-                        </mat-form-field>
-                        <mat-form-field class="tradeForm form_row1 ">
-                            <input matInput type="text " placeholder="Pair " [(ngModel)]="item.pair " name="pair ">
-                        </mat-form-field>
-                        <mat-form-field class="tradeForm form_row1 ">
-                            <mat-label>Selected:</mat-label>
-                            <mat-select [(value)]="localType " (valueChange)='changeType(item)'>
-                                <mat-option value='long'>Long</mat-option>
-                                <mat-option value='short'>Short</mat-option>
-                            </mat-select>
-                        </mat-form-field>
+                <form action="submit">
+                    <div fxLayout="row">
+
+                        <div>
+                            <div fxLayout="row">
+                                <mat-form-field class="tradeForm form_row1 remWidth">
+                                    <input matInput [value]="localDate" [matDatepicker]="picker" name="date">
+                                    <mat-datepicker-toggle matSuffix [for]="picker "></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+                                <mat-form-field class="tradeForm form_row1 remWidth">
+                                    <input matInput type="text " placeholder="Pair " [(ngModel)]="item.pair " name="pair ">
+                                </mat-form-field>
+                                <mat-form-field class="tradeForm form_row1" id="typeSelect">
+                                    <mat-label>Selected:</mat-label>
+                                    <mat-select [(value)]="localType " (valueChange)='changeType($event,item)'>
+                                        <!--changeType($event,item)-->
+                                        <mat-option value='long'>Long</mat-option>
+                                        <mat-option value='short'>Short</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div layout="row ">
+                                <mat-form-field layout="col " class="tradeForm form_row2 ">
+                                    <input matInput type="text " placeholder="Entry Price " [(ngModel)]="item.entry " name="entry " (input)="getStopLoss($event,item)" (input)="getProfit($event,item)">
+                                </mat-form-field>
+                                <mat-form-field layout="col " class="tradeForm form_row2 ">
+                                    <input matInput type="text " placeholder="Entry Amount " [(ngModel)]="item.amount " name="amount " (input)="getStopLoss($event,item)" (input)="getProfit($event,item)">
+                                </mat-form-field>
+                                <mat-form-field layout="col " class="tradeForm form_row2 ">
+                                    <input matInput type="text " placeholder="Risk " [(ngModel)]="item.risk " name="risk " (input)="getStopLoss($event,item)">
+                                </mat-form-field>
+                                <mat-form-field layout="col " class="tradeForm form_row2 ">
+                                    <input matInput type="text " placeholder="Stop-Loss " [(ngModel)]="item.stopLoss" name="stopLoss ">
+                                </mat-form-field>
+
+                            </div>
+                            <div layout="row ">
+                                <mat-form-field layout="col " class="tradeForm form_row3 ">
+                                    <input matInput type="text " placeholder="Leverage (*) " [(ngModel)]="item.leverage " name="leverage " (input)="getStopLoss($event,item)" (input)="getProfit($event,item)">
+                                </mat-form-field>
+                                <mat-form-field layout="col " class="tradeForm form_row3 ">
+                                    <input matInput type="text " placeholder="Exit " [(ngModel)]="item.exit " name="exit " (input)="getProfit($event,item)">
+                                </mat-form-field>
+                                <mat-form-field layout="col " class="tradeForm form_row3 ">
+                                    <input matInput type="text " placeholder="Profit " [(ngModel)]="item.profit" name="profit ">
+                                </mat-form-field>
+                                <mat-form-field layout="col " class="tradeForm form_row3 ">
+                                    <input matInput type="text " placeholder="Comments ">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div fxLayout="column ">
+                            <div>
+                                <p class="mat-caption right-side-text right-titles ">Value with leverage:</p>
+                                <p class="mat-body-1 right-side-text ">{{item.amount * item.leverage | number:'1.0-6'}}</p>
+                            </div>
+                            <div>
+
+                            </div>
+                        </div>
                     </div>
-                    <div layout="row ">
-                        <mat-form-field layout="col " class="tradeForm form_row2 ">
-                            <input matInput type="text " placeholder="Entry Price " [(ngModel)]="item.entry " name="entry ">
-                        </mat-form-field>
-                        <mat-form-field layout="col " class="tradeForm form_row2 ">
-                            <input matInput type="text " placeholder="Entry Amount " [(ngModel)]="item.amount " name="amount ">
-                        </mat-form-field>
-                        <mat-form-field layout="col " class="tradeForm form_row2 ">
-                            <input matInput type="text " placeholder="Stop-Loss " [(ngModel)]="item.stopLoss " name="stopLoss ">
-                        </mat-form-field>
-                    </div>
-                    <div layout="row ">
-                        <mat-form-field layout="col " class="tradeForm form_row3 ">
-                            <input matInput type="text " placeholder="Exit " [(ngModel)]="item.exit " name="exit ">
-                        </mat-form-field>
-                        <mat-form-field layout="col " class="tradeForm form_row3 ">
-                            <input matInput type="text " placeholder="Profit " [(ngModel)]="item.profit " name="profit ">
-                        </mat-form-field>
-                        <mat-form-field layout="col " class="tradeForm form_row3 ">
-                            <input matInput type="text " placeholder="Comments ">
-                        </mat-form-field>
-                    </div>
-                    <div layout="row ">
-                        <div fxFlex="80 "></div>
-                        <button mat-raised-button (click)='deleteTrade($event,item)' style="background-color:red; margin-right:10px;">Delete</button>
-                        <button mat-raised-button (click)='updateEntry()' type="submit">Submit</button>
+                    <div fxLayout="row ">
+                        <div fxFlex></div>
+                        <div>
+                            <button mat-raised-button (click)='deleteTrade($event,item)' style="background-color:red; margin-right:10px;">Delete</button>
+                            <button mat-raised-button (click)="updateEntry($event,item) " type=" submit ">Submit</button>
+                        </div>
                     </div>
 
                 </form>

@@ -15,9 +15,10 @@ import { map,switchMap } from "rxjs/operators";
 export class TradesService {
   trades$:Observable<Trade[]>;
   userData$:Observable<UserData>
-  tradesDocument: AngularFirestoreDocument<Trade[]>;
+  tradesDocument: AngularFirestoreDocument<Trade>;
   tradesCollection: AngularFirestoreCollection<Trade>;
   userDataDocument: AngularFirestoreDocument<UserData>;
+
 
 
   constructor(
@@ -27,9 +28,9 @@ export class TradesService {
   
 
   addTrade(trade:Trade){
-    console.log(trade);
     this.tradesCollection.add(trade);
   }
+
   deleteItem(item: Trade,user){
     this.tradesDocument = this.afs.doc(`Users/${user.uid}/Entries/${item.id}`);
     this.tradesDocument.delete();
@@ -44,8 +45,8 @@ export class TradesService {
   }
 
 
+  //Creates Observable of trades
   retrieveTrades(user){
-    //Creates Observable of trades
     this.tradesCollection = this.afs.collection(`Users/${user.uid}/Entries`);
     
     this.trades$ = this.tradesCollection.snapshotChanges().pipe(map(changes =>{
@@ -62,16 +63,67 @@ export class TradesService {
     amount:number,
     entry:number,
     risk:number,
-    type:boolean){
-      let stopLoss:number;
+    type:boolean,
+    leverage:number){      
+      let stopLoss: number;
+      let levAmount = amount*leverage
       if (type === true) {
-        stopLoss = ((amount-risk)/amount*entry);
+        stopLoss = ((levAmount-risk)/levAmount*entry);
       }
       else if(type === false) {
         stopLoss = ((amount+risk)/(amount/entry));
-      }
+      }      
       return stopLoss;
-  }
+  };
 
+  //Logic behind profit
+  calcProfit(trade:Trade){
+    let profit:number;
+    if (trade.type === true) {
+      profit = (((trade.exit/trade.entry)*(trade.amount*trade.leverage))-(trade.amount*trade.leverage));
+    }
+    else if(trade.type === false) {
+      profit = (-1*((trade.exit/trade.entry)*(trade.amount*trade.leverage)-trade.amount));
+    };
+    return profit;
+  };
+
+
+  updateEntries(trade:Trade,user){
+    this.tradesDocument = this.afs.doc(`Users/${user.uid}/Entries/${trade.id}`);
+    this.tradesDocument.update(trade)
+    
+  };
+
+  //Calculating entry validities
+  isStopLossValid(trade:Trade){
+    let result: Boolean;
+    if (
+      trade.amount != null &&
+      trade.entry != null && 
+      trade.risk != null
+      ){
+      result = true
+    }
+
+    else{
+      result = false
+    }
+    return result
+  };
+  isProfitValid(trade:Trade){
+    let result: Boolean;
+    if (
+      trade.amount != null &&
+      trade.entry != null &&
+      trade.leverage != null &&
+      trade.exit != null
+    ){
+      result = true;
+    } else{
+      result = false;
+    }
+    return result;
+  }
 }
 

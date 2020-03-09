@@ -16,10 +16,9 @@ import { DatePipe } from '@angular/common';
 export class AddTradeComponent implements OnInit {
 
 
-
-  timeS= Math.round(new Date().getTime() / 1000);
+  Times = new Date()
   trade: Trade = {
-    date: null,
+    date: this.Times,
     id: null,
     pair: null,
     entry: null,
@@ -29,12 +28,14 @@ export class AddTradeComponent implements OnInit {
     exit:null,
     profit: null,
     risk: null,
+    leverage: 1,
     comment: null
   }
+  /*
   expanded = false;
   localType = null;
   risk:number;
-  
+  */
 
   constructor(
     private userService: UserService,
@@ -48,13 +49,13 @@ export class AddTradeComponent implements OnInit {
 
   onSubmit(){
     this.tService.addTrade(this.trade);
-    this.expanded = false;
     for (let key in this.trade) {
       if (this.trade.hasOwnProperty(key)) {
         this.trade[key] = null;
       }
     }
   }
+  /*
   changeState(){
     this.expanded = true;
   }
@@ -87,5 +88,6 @@ export class AddTradeComponent implements OnInit {
       this.trade.type == false;
     }
   }
+  */
 }
 
