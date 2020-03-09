@@ -1,9 +1,9 @@
+import { UserData } from './../models/userData';
 import { AuthService } from './auth.service';
 import { User } from './../models/users';
 import { Injectable } from '@angular/core';
 import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore} from "@angular/fire/firestore";
 import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
 
 
 
@@ -16,6 +16,7 @@ export class UserService {
   usersDocument: AngularFirestoreDocument<User>;
   usersCollection: AngularFirestoreCollection<User>;
   user:User;
+
   
   
 
@@ -32,25 +33,12 @@ export class UserService {
       }
       
       this.user = userObj;
-      
-      /*
-      this.user$ = this.usersDocument.snapshotChanges().pipe(map(changes =>{
-        return changes.map(a =>{
-          const data = a.payload.doc.data() as User;
-          data.uid = a.payload.doc.id;
-          return data;
-        })
-      }));
-       */
     })
-    
-  }
 
+
+  }
 
   getUser(){
     return this.user;
-  }
-  getUerId(){
-    return this.user$["id"];
   }
 }

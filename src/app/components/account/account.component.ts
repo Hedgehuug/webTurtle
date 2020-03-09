@@ -1,4 +1,6 @@
+import { UserData } from './../../models/userData';
 import { AuthService } from './../../services/auth.service';
+import { TradesService } from './../../services/trades.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,17 +9,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
-
-  userId=this.auth.userData();
+  items;
+  constructor(private ts:TradesService,private as:AuthService) { }
   
-
-
-  constructor(private auth: AuthService) { }
-  
-  ngOnInit() {}
-
-  printId(){
-    console.log("succ");
-    
+  ngOnInit() {
+    this.as.user$.subscribe(data =>{
+      this.ts.getUserData(data).subscribe(data2 =>{
+        console.log(data2.initialBalance);
+        
+      })
+    })
   }
 }

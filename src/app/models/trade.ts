@@ -1,7 +1,8 @@
+import { Timestamp } from 'rxjs/internal/operators/timestamp';
 
 export interface Trade {
     id?: string;
-    date?: string;
+    date?: Date;
     pair?: string;
     type?: boolean;
     entry?: number;
@@ -9,4 +10,7 @@ export interface Trade {
     stopLoss?: number;
     exit?: number;
     profit?: number;
+    risk?: number;
+    leverage?: number;
+    comment?: string;
 }

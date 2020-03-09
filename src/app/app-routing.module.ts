@@ -1,3 +1,6 @@
+import { UnderConstructionComponent } from './components/under-construction/under-construction.component';
+import { EntriesComponent } from './components/accountElements/entries/entries.component';
+import { DashboardComponent } from './components/accountElements/dashboard/dashboard.component';
 import { AuthGuard } from './auth.guard';
 import { AccountComponent } from './components/account/account.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
@@ -21,9 +24,28 @@ const routes: Routes = [
     component: LandingPageComponent
   },
   {
+    path:"about",
+    component: UnderConstructionComponent
+  },
+  {
     path:"account",
     component: AccountComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    children:[
+      {
+        path:'',
+        redirectTo: 'dashboard',
+        pathMatch:'full'
+      },
+      {
+        path:'dashboard',
+        component: DashboardComponent
+      },
+      {
+        path:'entries',
+        component: EntriesComponent
+      }
+    ]
   },
   {
     path:'',

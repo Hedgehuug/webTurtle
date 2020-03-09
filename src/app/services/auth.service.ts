@@ -36,12 +36,15 @@ export class AuthService {
       })
     )
    }
+   //Google log-in
    async googleSignin() {
     const provider =  new auth.GoogleAuthProvider();
     const credential = await this.afAuth.auth.signInWithPopup(provider);
     return this.updateUserData(credential.user);
   }
 
+
+  //Update user info
    private updateUserData(user){
      const userRef: AngularFirestoreDocument<User> = this.afs.doc(`Users/${user.uid}`);
 
@@ -52,6 +55,7 @@ export class AuthService {
      }
      return userRef.set(data, {merge:true});
 
+     //Log-out
    }
    async signOut(){
      await this.afAuth.auth.signOut();

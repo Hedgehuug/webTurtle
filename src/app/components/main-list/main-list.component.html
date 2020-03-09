@@ -1,36 +1,139 @@
-<div *ngIf="trades?.length">
-    <div class="row" style="margin-bottom:0%; margin-top:15px;">
-        <span class="title col s2 ">Date:</span>
-        <span class="title col s2 ">Pair:</span>
-        <span class="title col s2 ">Entry:</span>
-        <span class="title col s2 ">Amount:</span>
-    </div>
-    <ul class="collection" *ngFor="let item of trades">
-        <li class="collection-item" style="padding-bottom: 0%; padding-left:0%;">
-            <div class="row" style="margin-bottom:0;">
-                <div class="input-field col s2">
-                    <input type="datetime" [(ngModel)]="item.date" class="validate">
+<div *ngIf="trades?.length" style="background-color:inherit; padding:20px; margin:15px 0 0 0;">
+    <mat-accordion multi="false">
+        <div layout="row" style="margin:0px 0px 0px 2%;">
+            <mat-label fxFlex='16'>
+                Date:
+            </mat-label>
+            <mat-label fxFlex='16'>
+                Pair:
+            </mat-label>
+            <mat-label fxFlex='16'>
+                Entry:
+            </mat-label>
+            <mat-label fxFlex='16'>
+                Amount:
+            </mat-label>
+            <mat-label fxFlex='16'>
+                Stop-Loss:
+            </mat-label>
+            <mat-label fxFlex='16'>
+                Exit:
+            </mat-label>
+        </div>
+        <mat-expansion-panel (opened)="getInfo(item)" class=" list " *ngFor="let item of trades" style="margin:5px; ">
+            <!--Header for expandable view    date:'dd/MM/yyy'-->
+            <mat-expansion-panel-header class="mat-typography">
+                <div class="expansion_header">
+                    <mat-panel-title *ngIf="item.date != null">
+                        {{item.date["seconds"] * 1000| date:'dd/MM/yyy':'UTC'}}
+                    </mat-panel-title>
                 </div>
-                <div class="input-field col s2">
-                    <input type="text" placeholder="Enter Pair:" [(ngModel)]="item.pair" id="pair" class="validate">
-                    <label class="active" for="pair">Trading Pair:</label>
+                <div class="expansion_header ">
+                    <mat-panel-title>
+                        {{item.pair | uppercase}}
+                    </mat-panel-title>
                 </div>
-                <div class="input-field col s2">
-                    <input type="text" placeholder="Enter Entry:" [(ngModel)]="item.entry" id="entry" class="validate">
-                    <label class="active" for="entry">Entry Price:</label>
-                </div>
-                <div class="input-field col s2">
-                    <input type="text" placeholder="Enter Amount:" [(ngModel)]="item.amount" id="amount" class="validate">
-                    <label class="active" for="amount">Entry Amount:</label>
-                </div>
-                <div class="input-field col s2">
-                    <input type="text" placeholder="Stop-loss:" [(ngModel)]="item.stopLoss" id="stopLoss" class="validate">
-                    <label class="active" for="amount">Stop-loss:</label>
-                </div>
-                <i (click)="editItem($event,item)" class="fa fa-pencil right" style="cursor:pointer"></i>
+                <div class="expansion_header ">
+                    <mat-panel-title>
 
-            </div>
+                        {{item.entry | number:'2.0-4'}}
+                    </mat-panel-title>
+                </div>
+                <div class="expansion_header ">
+                    <mat-panel-title>
 
-        </li>
-    </ul>
+                        {{item.amount | number:'2.0-4'}}
+                    </mat-panel-title>
+                </div>
+                <div class="expansion_header ">
+                    <mat-panel-title>
+
+                        {{item.stopLoss | number:'2.0-4'}}
+                    </mat-panel-title>
+                </div>
+                <div class="expansion_header ">
+                    <mat-panel-title>
+
+                        {{item.exit | number:'2.0-4'}}
+                    </mat-panel-title>
+                </div>
+            </mat-expansion-panel-header>
+
+
+
+            <ng-template matExpansionPanelContent>
+                <form action="submit">
+                    <div fxLayout="row">
+
+                        <div>
+                            <div fxLayout="row">
+                                <mat-form-field class="tradeForm form_row1 remWidth">
+                                    <input matInput [value]="localDate" [matDatepicker]="picker" name="date">
+                                    <mat-datepicker-toggle matSuffix [for]="picker "></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+                                <mat-form-field class="tradeForm form_row1 remWidth">
+                                    <input matInput type="text " placeholder="Pair " [(ngModel)]="item.pair " name="pair ">
+                                </mat-form-field>
+                                <mat-form-field class="tradeForm form_row1" id="typeSelect">
+                                    <mat-label>Selected:</mat-label>
+                                    <mat-select [(value)]="localType " (valueChange)='changeType($event,item)'>
+                                        <!--changeType($event,item)-->
+                                        <mat-option value='long'>Long</mat-option>
+                                        <mat-option value='short'>Short</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div layout="row ">
+                                <mat-form-field layout="col " class="tradeForm form_row2 ">
+                                    <input matInput type="text " placeholder="Entry Price " [(ngModel)]="item.entry " name="entry " (input)="getStopLoss($event,item)" (input)="getProfit($event,item)">
+                                </mat-form-field>
+                                <mat-form-field layout="col " class="tradeForm form_row2 ">
+                                    <input matInput type="text " placeholder="Entry Amount " [(ngModel)]="item.amount " name="amount " (input)="getStopLoss($event,item)" (input)="getProfit($event,item)">
+                                </mat-form-field>
+                                <mat-form-field layout="col " class="tradeForm form_row2 ">
+                                    <input matInput type="text " placeholder="Risk " [(ngModel)]="item.risk " name="risk " (input)="getStopLoss($event,item)">
+                                </mat-form-field>
+                                <mat-form-field layout="col " class="tradeForm form_row2 ">
+                                    <input matInput type="text " placeholder="Stop-Loss " [(ngModel)]="item.stopLoss" name="stopLoss ">
+                                </mat-form-field>
+
+                            </div>
+                            <div layout="row ">
+                                <mat-form-field layout="col " class="tradeForm form_row3 ">
+                                    <input matInput type="text " placeholder="Leverage (*) " [(ngModel)]="item.leverage " name="leverage " (input)="getStopLoss($event,item)" (input)="getProfit($event,item)">
+                                </mat-form-field>
+                                <mat-form-field layout="col " class="tradeForm form_row3 ">
+                                    <input matInput type="text " placeholder="Exit " [(ngModel)]="item.exit " name="exit " (input)="getProfit($event,item)">
+                                </mat-form-field>
+                                <mat-form-field layout="col " class="tradeForm form_row3 ">
+                                    <input matInput type="text " placeholder="Profit " [(ngModel)]="item.profit" name="profit ">
+                                </mat-form-field>
+                                <mat-form-field layout="col " class="tradeForm form_row3 ">
+                                    <input matInput type="text " placeholder="Comments ">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div fxLayout="column ">
+                            <div>
+                                <p class="mat-caption right-side-text right-titles ">Value with leverage:</p>
+                                <p class="mat-body-1 right-side-text ">{{item.amount * item.leverage | number:'1.0-6'}}</p>
+                            </div>
+                            <div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div fxLayout="row ">
+                        <div fxFlex></div>
+                        <div>
+                            <button mat-raised-button (click)='deleteTrade($event,item)' style="background-color:red; margin-right:10px;">Delete</button>
+                            <button mat-raised-button (click)="updateEntry($event,item) " type=" submit ">Submit</button>
+                        </div>
+                    </div>
+
+                </form>
+            </ng-template>
+        </mat-expansion-panel>
+    </mat-accordion>
 </div>

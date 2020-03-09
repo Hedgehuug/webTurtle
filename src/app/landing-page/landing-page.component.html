@@ -1,4 +1,39 @@
-<div class="container">
+<div style="height:40vh;">
     <app-login></app-login>
     <app-registration></app-registration>
+</div>
+<div id="main-body">
+    <div id="solutions">
+        <mat-card id="solution-card">
+            <div fxLayout="column">
+                <mat-card-title class="solContent">
+                    <h4 class="mat-title">Solutions</h4>
+                </mat-card-title>
+                <mat-card-content class="solContent">
+                    <mat-divider></mat-divider>
+                    <div fxLayout="row">
+                        <div fxFlex></div>
+                        <div id="solution-inner" class="solContent" fxLayout="row" fxLayoutGap="4rem">
+                            <div class="solutionIcons" fxLayout="column">
+                                <img class="solIcons solStuff" src="./assets/Icons/003-search.svg">
+                                <p class="mat-body-2 solStuff">Log Trades</p>
+                            </div>
+                            <div class="solutionIcons" fxLayout="column">
+                                <img class="solIcons solStuff" src="./assets/Icons/002-profit.svg">
+                                <p class="mat-body-2 solStuff">Analyse Strategies</p>
+                            </div>
+                            <div class="solutionIcons" fxLayout="column">
+                                <img class="solIcons solStuff" src="./assets/Icons/001-growth.svg">
+                                <p class="mat-body-2 solStuff">Visualise progress</p>
+                            </div>
+                        </div>
+                        <div fxFlex></div>
+                    </div>
+                </mat-card-content>
+            </div>
+        </mat-card>
+
+    </div>
+    <mat-divider style="margin: 2rem"></mat-divider>
+    <h1 class="mat-headline">News:</h1>
 </div>

@@ -1,0 +1,30 @@
+#main-body {
+    background-color: beige;
+}
+
+#solutions {
+    margin: 4vh 8vw 0 8vw;
+}
+
+#solution-card {
+    background: linear-gradient(to bottom right, #83A948, #83A948);
+}
+
+.solContent {
+    margin: auto;
+}
+
+#solution-inner {
+    min-width: 100%;
+    padding: 2rem;
+}
+
+.solIcons {
+    margin: 0;
+    width: 40%;
+    height: auto;
+}
+
+.solStuff {
+    margin: auto;
+}
