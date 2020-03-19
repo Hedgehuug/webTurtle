@@ -27,4 +27,9 @@
 
 .solStuff {
     margin: auto;
+    font-weight: 400;
+}
+
+.iconText {
+    margin-top: 0.5rem;
 }
