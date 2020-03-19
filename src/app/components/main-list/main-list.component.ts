@@ -105,12 +105,7 @@ export class MainListComponent implements OnInit {
     if (this.ts.isProfitValid(trade)){
       trade.profit = this.ts.calcProfit(trade);
     }
-  }
-
-  printType(){
-    console.log("now")
-  }
-    
+  } 
 }
 
 
