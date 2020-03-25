@@ -20,7 +20,7 @@
                 Exit:
             </mat-label>
         </div>
-        <mat-expansion-panel (opened)="getInfo(item)" class=" list " *ngFor="let item of trades" style="margin:5px; ">
+        <mat-expansion-panel (opened)="getInfo($event,item)" class=" list " *ngFor="let item of trades" style="margin:5px; ">
             <!--Header for expandable view    date:'dd/MM/yyy'-->
             <mat-expansion-panel-header class="mat-typography">
                 <div class="expansion_header">
