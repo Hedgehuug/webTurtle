@@ -57,7 +57,7 @@ export class MainListComponent implements OnInit {
 
 
   //Function for displaying proper trade type
-  getInfo(item:Trade){
+  getInfo(event,item:Trade){
     if (item.type == true) {
       this.localType = "Long";
     }
