@@ -47,4 +47,4 @@ testem.log
 Thumbs.db
 
 # Personal Additions
-/src/environments
+/environments
